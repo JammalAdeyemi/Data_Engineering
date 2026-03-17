@@ -1,0 +1,18 @@
+import logging
+import pendulum
+from airflow.decorators import dag, task
+
+# @dag decorators the greet_task to denote it's the main function
+@dag(
+    start_date=pendulum.now()
+)
+def greet_flow():
+
+    @task
+    def hello_world():
+        logging.info("Hello World!")
+
+    hello_world_task=hello_world()
+
+greet_flow_dag=greet_flow()
+
