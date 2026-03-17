@@ -11,6 +11,7 @@ def greet_flow():
     @task
     def hello_world():
         logging.info("Hello World!")
+        # logging.info("Welcome to Airflow 2!")
 
     hello_world_task=hello_world()
 
