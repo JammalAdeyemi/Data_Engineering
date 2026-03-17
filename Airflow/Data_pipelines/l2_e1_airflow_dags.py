@@ -1,10 +1,10 @@
 import logging
-import pendulum
+from datetime import datetime
 from airflow.decorators import dag, task
 
 # @dag decorators the greet_task to denote it's the main function
 @dag(
-    start_date=pendulum.now()
+    start_date=datetime(2025, 3, 27)
 )
 def greet_flow():
 

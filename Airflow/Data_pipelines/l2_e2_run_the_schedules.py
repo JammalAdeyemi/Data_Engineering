@@ -1,19 +1,20 @@
 import logging
-import pendulum
+from datetime import datetime
 from airflow.decorators import dag, task
 
 # @dag decorators the greet_task to denote it's the main function
 @dag(
-    schedule_interval='@daily'
-    start_date=pendulum.now()
+    schedule_interval='@daily',
+    start_date=datetime(2025, 3, 27),
+    catchup=False,
+    max_active_runs=1
 )
-def greet_flow():
+def greet_flow_schedule():
 
     @task
-    def hello_world():
+    def hello_world_schedule():
         logging.info("Hello World!")
 
-    hello_world_task=hello_world()
+    hello_world_task=hello_world_schedule()
 
-greet_flow_dag=greet_flow()
-
+greet_flow_dag=greet_flow_schedule()
