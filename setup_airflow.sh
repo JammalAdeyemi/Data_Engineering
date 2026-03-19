@@ -7,10 +7,11 @@ set -euo pipefail
 AIRFLOW_HOME="/workspaces/Data_Engineering/airflow_home"
 DAGS_FOLDER="$AIRFLOW_HOME/dags"
 PROJECT_DIR="/workspaces/Data_Engineering/Airflow"
+VENV_PATH="$HOME/airflow_venv"
 
 ADMIN_USER="${ADMIN_USER:-admin}"
-ADMIN_FIRSTNAME="${ADMIN_FIRSTNAME:-Admin}"
-ADMIN_LASTNAME="${ADMIN_LASTNAME:-User}"
+ADMIN_FIRSTNAME="${ADMIN_FIRSTNAME:-aStudent}"
+ADMIN_LASTNAME="${ADMIN_LASTNAME:-aStudent}"
 ADMIN_EMAIL="${ADMIN_EMAIL:-admin@example.com}"
 ADMIN_PASSWORD="${ADMIN_PASSWORD:-admin}"
 
@@ -18,35 +19,35 @@ echo "=========================================="
 echo "Setting up Apache Airflow"
 echo "=========================================="
 
-# ---------------------------
-# Step 0: Setup Python environment
-# ---------------------------
+# ---------------------------------
+# Step 0: Setup Python(Virtual) env
+# ---------------------------------
 echo ""
 echo "Step 0: Setting up Python environment..."
+
+rm -rf "$AIRFLOW_HOME"
+rm -rf "$VENV_PATH"
 
 python3 --version
 
 # Create virtual environment
-python3 -m venv ~/airflow_venv
-
+python3 -m venv "$VENV_PATH"
 # Activate it
-source ~/airflow_venv/bin/activate
-
+source "$VENV_PATH/bin/activate"
 # Upgrade core tools
 pip install --upgrade pip setuptools wheel
 
 echo "✓ Python virtual environment ready"
 
 # ---------------------------
-# Step 1: Create directories
+# Step 1: Install Airflow + AWS
 # ---------------------------
 echo ""
-echo "Step 1: Creating Airflow home directory..."
-mkdir -p "$AIRFLOW_HOME"
-mkdir -p "$DAGS_FOLDER"
-mkdir -p "$DAGS_FOLDER/aws"
-mkdir -p "$DAGS_FOLDER/pipelines"
-echo "✓ Directories created"
+echo "Step 1: Installing Apache Airflow..."
+pip install "apache-airflow==2.9.0" \
+            "apache-airflow-providers-amazon"
+
+echo "✓ Apache Airflow installed"
 
 # ---------------------------
 # Step 2: Set environment variables
@@ -72,17 +73,16 @@ EOF
 echo "✓ Environment variables set"
 
 # ---------------------------
-# Step 3: Install Airflow
+# Step 3: Create directories
 # ---------------------------
 echo ""
-echo "Step 3: Installing Apache Airflow..."
-pip install "apache-airflow==2.9.0"
-pip install "apache-airflow-providers-amazon"
-echo "✓ Apache Airflow installed"
+echo "Step 3: Creating Airflow home directory..."
+mkdir -p "$AIRFLOW_HOME"
+mkdir -p "$DAGS_FOLDER"
+mkdir -p "$DAGS_FOLDER/aws"
+mkdir -p "$DAGS_FOLDER/pipelines"
 
-# Activate airflow venv automatically
-grep -q "source ~/airflow_venv/bin/activate" ~/.bashrc || \
-echo "source ~/airflow_venv/bin/activate" >> ~/.bashrc
+echo "✓ Directories created"
 
 # ---------------------------
 # Step 4: Link DAG files
