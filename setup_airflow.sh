@@ -45,7 +45,8 @@ echo "✓ Python virtual environment ready"
 echo ""
 echo "Step 1: Installing Apache Airflow..."
 pip install "apache-airflow==2.9.0" \
-            "apache-airflow-providers-amazon"
+            "apache-airflow-providers-amazon" \
+            "apache-airflow-providers-postgres"
 
 echo "✓ Apache Airflow installed"
 
@@ -152,7 +153,7 @@ echo "  Database: $AIRFLOW_HOME/airflow.db"
 echo "  Admin User: $ADMIN_USER"
 echo ""
 echo "Next steps:"
-echo "1. Run: source ~/.bashrc"
+echo "1. Run: source ~/airflow_venv/bin/activate"
 echo "2. Start webserver: airflow webserver --port 8080 --host 0.0.0.0"
 echo "3. In another terminal, start scheduler: airflow scheduler"
 echo "4. Open Airflow from the Codespaces PORTS tab on port 8080"
