@@ -77,6 +77,7 @@ echo "✓ Environment variables set"
 echo ""
 echo "Step 3: Installing Apache Airflow..."
 pip install "apache-airflow==2.9.0"
+pip install "apache-airflow-providers-amazon"
 echo "✓ Apache Airflow installed"
 
 # Activate airflow venv automatically
