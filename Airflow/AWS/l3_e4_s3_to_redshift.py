@@ -4,7 +4,7 @@ import logging
 from airflow.decorators import dag, task
 from airflow.secrets.metastore import MetastoreBackend
 from airflow.hooks.postgres_hook import PostgresHook
-from airflow.operators.postgres_operator import PostgresOperator
+from airflow.providers.postgres.operators.postgres import PostgresOperator
 
 from udacity.common import sql_statements
 
