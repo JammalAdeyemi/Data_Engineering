@@ -42,9 +42,7 @@ echo "✓ Python virtual environment ready"
 # ---------------------------
 echo ""
 echo "Step 1: Installing Apache Airflow..."
-
-pip install "apache-airflow[amazon,postgres]==3.1.8" 
-  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.1.8/constraints-3.12.txt"
+pip install "apache-airflow[amazon,postgres]==3.1.8" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.1.8/constraints-3.12.txt"
 
 echo "✓ Apache Airflow installed"
 
@@ -137,7 +135,7 @@ echo "1. Activate venv:"
 echo "   source ~/airflow_venv/bin/activate"
 echo ""
 echo "2. Start webserver:"
-echo "   airflow webserver --port 8080 --host 0.0.0.0"
+echo "   airflow api-server --host 0.0.0.0 --port 8080"
 echo ""
 echo "3. Start scheduler (new terminal):"
 echo "   airflow scheduler"
