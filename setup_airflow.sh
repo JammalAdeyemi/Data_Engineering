@@ -44,9 +44,8 @@ echo "✓ Python virtual environment ready"
 # ---------------------------
 echo ""
 echo "Step 1: Installing Apache Airflow..."
-pip install "apache-airflow==2.9.0" \
-            "apache-airflow-providers-amazon" \
-            "apache-airflow-providers-postgres"
+
+pip install "apache-airflow[amazon,postgres]==2.10.0" --constraint "https://raw.githubusercontent.com/apache-airflow/constraints-2.10.0/constraints-3.12.txt"
 
 echo "✓ Apache Airflow installed"
 
@@ -122,10 +121,6 @@ echo "✓ Database initialised"
 # ---------------------------
 # Step 6: Create admin user
 # ---------------------------
-echo ""
-echo "Step 6: Starting Airflow (standalone mode)..."
-airflow standalone
-
 echo ""
 echo "Step 6a: Creating admin user..."
 
