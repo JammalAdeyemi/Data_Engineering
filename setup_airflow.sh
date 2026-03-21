@@ -90,10 +90,15 @@ mkdir -p "$DAGS_FOLDER/pipelines"
 echo "✓ Directories created"
 
 # ---------------------------
-# Step 4: Link DAG files
+# Step 4: Link modules and DAG files
 # ---------------------------
 echo ""
-echo "Step 4: Linking DAG files..."
+echo "Step 4: Linking modules and DAG files..."
+
+if [ -d "$PROJECT_DIR/udacity" ]; then
+    ln -sf "$PROJECT_DIR/udacity" "$AIRFLOW_HOME/udacity"
+    echo "  ✓ Linked udacity module"
+fi
 
 if [ -d "$PROJECT_DIR/AWS" ]; then
     for file in "$PROJECT_DIR/AWS"/*.py; do
@@ -113,7 +118,7 @@ if [ -d "$PROJECT_DIR/Data_pipelines" ]; then
     done
 fi
 
-echo "✓ DAG linking complete"
+echo "✓ Linking complete"
 
 # ---------------------------
 # Step 5: Initialise database
@@ -127,7 +132,7 @@ echo "✓ Database initialised"
 # Step 6: Create admin user
 # ---------------------------
 echo ""
-echo "Step 6a: Creating admin user..."
+echo "Step 6: Creating admin user..."
 
 if airflow users list | grep -q "$ADMIN_USER"; then
     echo "✓ Admin user already exists: $ADMIN_USER"
