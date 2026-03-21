@@ -60,7 +60,7 @@ export AIRFLOW_HOME="$AIRFLOW_HOME"
 export AIRFLOW__CORE__LOAD_EXAMPLES=False
 export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="sqlite:///$AIRFLOW_HOME/airflow.db"
 export AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX=True
-export PYTHONPATH="/workspaces/Data_Engineering:$PYTHONPATH"
+export PYTHONPATH="/workspaces/Data_Engineering:${PYTHONPATH:-}"
 
 # Persist only if not already present
 grep -q 'export AIRFLOW_HOME="/workspaces/Data_Engineering/airflow_home"' ~/.bashrc || {
@@ -71,7 +71,7 @@ export AIRFLOW_HOME="/workspaces/Data_Engineering/airflow_home"
 export AIRFLOW__CORE__LOAD_EXAMPLES=False
 export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="sqlite:////workspaces/Data_Engineering/airflow_home/airflow.db"
 export AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX=True
-export PYTHONPATH="/workspaces/Data_Engineering:\$PYTHONPATH"
+export PYTHONPATH="/workspaces/Data_Engineering:\${PYTHONPATH:-}"
 EOF
 }
 
