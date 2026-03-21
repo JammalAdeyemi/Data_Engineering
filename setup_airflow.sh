@@ -86,6 +86,7 @@ mkdir -p "$AIRFLOW_HOME"
 mkdir -p "$DAGS_FOLDER"
 mkdir -p "$DAGS_FOLDER/aws"
 mkdir -p "$DAGS_FOLDER/pipelines"
+mkdir -p "$AIRFLOW_HOME/plugins"
 
 echo "✓ Directories created"
 
@@ -93,12 +94,7 @@ echo "✓ Directories created"
 # Step 4: Link modules and DAG files
 # ---------------------------
 echo ""
-echo "Step 4: Linking modules and DAG files..."
-
-if [ -d "$PROJECT_DIR/udacity" ]; then
-    ln -sf "$PROJECT_DIR/udacity" "$AIRFLOW_HOME/udacity"
-    echo "  ✓ Linked udacity module"
-fi
+echo "Step 4: Linking DAG files..."
 
 if [ -d "$PROJECT_DIR/AWS" ]; then
     for file in "$PROJECT_DIR/AWS"/*.py; do
@@ -116,6 +112,12 @@ if [ -d "$PROJECT_DIR/Data_pipelines" ]; then
             echo "  ✓ Linked pipeline DAG: $(basename "$file")"
         fi
     done
+fi
+
+# Copy shared SQL statements to Airflow plugins folder
+if [ -f "$PROJECT_DIR/udacity/common/sql_statement.py" ]; then
+    cp "$PROJECT_DIR/udacity/common/sql_statement.py" "$AIRFLOW_HOME/plugins/sql_statement.py"
+    echo "  ✓ Copied sql_statement.py to plugins folder"
 fi
 
 echo "✓ Linking complete"
