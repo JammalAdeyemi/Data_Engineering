@@ -22,19 +22,14 @@ def data_partitioning():
         metastoreBackend = MetastoreBackend()
         aws_connection=metastoreBackend.get_connection("aws_credentials")
         redshift_hook = PostgresHook("redshift")
-        # # #
         # TODO: How do we get the execution_date from our context?
-        # execution_date=kwargs["<REPLACE>"]
-        execution_date = pendulum.now()
-        # # #
-
-        # # #
-        # TODO: modify the parameters when formatting sql_statements.COPY_ALL_TRIPS_SQL
-        # to include the year and month the pipeline executed
-        #
+        execution_date = kwargs["execution_date"]
+        # TODO: modify the parameters when formatting sql_statements.COPY_ALL_TRIPS_SQL to include the year and month the pipeline executed        #
         sql_stmt = sql_statement.COPY_ALL_TRIPS_SQL.format(
             aws_connection.login,
             aws_connection.password,
+            year=execution_date.year,
+            month=execution_date.month
         )
         redshift_hook.run(sql_stmt)
 
