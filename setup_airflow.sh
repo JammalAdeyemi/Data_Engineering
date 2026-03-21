@@ -45,7 +45,8 @@ echo "✓ Python virtual environment ready"
 echo ""
 echo "Step 1: Installing Apache Airflow..."
 
-pip install "apache-airflow[amazon,postgres]==2.10.4" --constraint "https://raw.githubusercontent.com/apache-airflow/constraints-2.10.4/constraints-3.12.txt"
+pip install "apache-airflow[amazon]==2.10.4"
+pip install apache-airflow-providers-postgres
 
 echo "✓ Apache Airflow installed"
 
