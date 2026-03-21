@@ -13,7 +13,6 @@ from udacity.common import sql_statements
 )
 def load_data_to_redshift():
 
-
     @task
     def load_task():    
         metastoreBackend = MetastoreBackend()
