@@ -46,7 +46,8 @@ echo ""
 echo "Step 1: Installing Apache Airflow..."
 
 pip install "apache-airflow[amazon]==2.10.4"
-pip install apache-airflow-providers-postgres
+pip install "apache-airflow-providers-postgres==5.12.0"
+pip install psycopg2-binary
 
 echo "✓ Apache Airflow installed"
 
