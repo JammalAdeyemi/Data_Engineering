@@ -32,7 +32,7 @@ def load_data_to_redshift():
     location_traffic_task = PostgresOperator(
         task_id="calculate_location_traffic",
         postgres_conn_id="redshift",
-        sql=sql_statement.LOCATION_TRAFFIC_SQL
+        sql=[sql_statement.LOCATION_TRAFFIC_SQL_DROP, sql_statement.LOCATION_TRAFFIC_SQL_CREATE]
     )
 
     load_data = load_task()   
