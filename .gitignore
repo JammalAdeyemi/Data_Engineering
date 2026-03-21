@@ -2,7 +2,6 @@
 airflow_home/
 *.db
 *.pid
-*.py
 *.cfg
 
 # Python
