@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 import sys
 from airflow.decorators import dag, task
@@ -14,7 +14,7 @@ import sql_statement
 )
 def data_quality():
 
-    @task(sla=datetime.timedelta(hours=1))
+    @task(sla=timedelta(hours=1))
     def load_trip_data_to_redshift(*args, **kwargs):
         metastoreBackend = MetastoreBackend()
         aws_connection=metastoreBackend.get_connection("aws_credentials")
