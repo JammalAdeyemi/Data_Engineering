@@ -120,6 +120,12 @@ if [ -f "$PROJECT_DIR/udacity/common/sql_statement.py" ]; then
     echo "  ✓ Copied sql_statement.py to plugins folder"
 fi
 
+# Copy custom operators to Airflow plugins folder
+if [ -d "/workspaces/Data_Engineering/custom_operators" ]; then
+    cp -r "/workspaces/Data_Engineering/custom_operators" "$AIRFLOW_HOME/plugins/"
+    echo "  ✓ Copied custom_operators to plugins folder"
+fi
+
 echo "✓ Linking complete"
 
 # ---------------------------
